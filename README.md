@@ -1,16 +1,20 @@
 # Todo MERN App
 
-## Overview
-
-This is a simple Todo MERN (MongoDB, Express, React, Node.js) app that allows users to create, read, update, and delete todos. The app is built using the MERN stack and follows the CRUD (Create, Read, Update, Delete) operations.
+This is a simple Todo MERN (MongoDB, Express, React, Node.js) app that follows the CRUD (Create, Read, Update, Delete) operations for the todos.
 This project was built following the [MERN Stack Tutorial - Build Todo App With Node JS, Express, React & MongoDB (YouTube/CurlyBraces)](https://www.youtube.com/watch?v=U4syTDaAKWg) tutorial on YouTube.
 
-## Getting Started
+## Features
 
-To run this app locally, you need to have the following installed on your machine:
+The app provides the following features:
 
-- Node.js
-- MongoDB
+    - Users can create, read, update, and delete todos
+    - Todos are stored in a MongoDB database
+
+Note: The app requires a MongoDB database to be running in order to work properly.
+
+## Installation
+
+To install this application, you will need to have Node.js and MongoDB installed on your system.
 
 Once you have these installed, follow these steps:
 
@@ -20,54 +24,63 @@ Once you have these installed, follow these steps:
 git clone https://github.com/arsy786/todo-mern-app.git
 ```
 
-2. Change directory to the project folder:
+2. Change directory to the project folders (Server and Client) and install the required packages:
 
 ```sh
-cd todo-mern-app
+cd todo-mern-app/server && npm install
 ```
-
-3. Install the required packages:
 
 ```sh
-npm install
+cd todo-mern-app/client && npm install
 ```
 
-4. Create a .env file in the root folder and add the following:
+3. Create a .env file in the Server folder and add the following:
 
 ```makefile
-PORT=5000
+PORT=<Your Port number>
 MONGODB_URI=<Your MongoDB connection string>
 ```
 
-5. Start the server:
-
-```sh
-npm run server
+- For example:
+```makefile
+PORT=5500
+MONGODB_URI=mongodb+srv://<username>:<password>@mern-apps.jpfvcfy.mongodb.net/<databaseName>?retryWrites=true&w=majority
 ```
 
-6. Open another terminal window and start the client:
+Where you add your username, password and databaseName (optional) from your MongoDB connection.
+
+5. While in the Server directory, start the Server using:
 
 ```sh
-npm run client
+npm run start
 ```
 
-7. Open your browser and navigate to http://localhost:3000
+6. Open another terminal window, change directory to the Client, and start the client using:
 
-## Server
+```sh
+npm run start
+```
 
-The server-side code is located in the /server folder. The server has the following API endpoints:
+## Usage
 
-    GET /api/todos - get all todos
-    POST /api/todos - create a new todo
-    PUT /api/todos/:id - update a todo with the specified ID
-    DELETE /api/todos/:id - delete a todo with the specified ID
-    PUT /api/todos/:id/complete - mark a todo as complete
+Once the server is running, you can access the application at http://localhost:3000.
 
-## Client
+### Server (Backend)
 
-The client-side code is located in the /client folder. The App.js file is the entry point for the React app and has the following structure:
+The backend provides a REST API for managing todos. Here are the available endpoints:
 
-    App component - the top-level component that contains the entire app
-        TodoForm component - renders the form for creating a new todo
-        TodoList component - renders the list of todos and allows users to update and delete them
-            TodoItem component - renders a single todo item
+    GET /api/items - get all todos
+    POST /api/item - create a new todo
+    PUT /api/item/:id - update a todo by ID
+    DELETE /api/item/:id - delete a todo by ID
+    
+### Client (Frontend)
+
+The app provides the following features:
+
+    - View a list of todos
+    - Create a new todo
+    - Update a todo
+    - Delete a todo
+
+Note: The app requires the backend server to be running in order to work properly.
