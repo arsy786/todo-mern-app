@@ -86,20 +86,20 @@ This project is divided into two main parts: the server (API) and the client (UI
 
 After starting both the backend and frontend servers, you can access the web application by navigating to `http://localhost:3000` in your web browser. Ensure both servers are running concurrently to allow the frontend to communicate with the backend effectively.
 
-## Server
+## Server (Backend)
 
 The backend provides a REST API for managing todos. Here are the available endpoints:
 
     GET /api/items - get all todos
     POST /api/item - create a new todo
-    PUT /api/item/:id - update a todo with the specified ID
-    DELETE /api/item/:id - delete a todo with the specified ID
+    PUT /api/item/:id - update a todo by ID
+    DELETE /api/item/:id - delete a todo by ID
 
-## Client
+## Client (Frontend)
 
-The client-side code is located in the /client folder. The App.js file is the entry point for the React app and has the following structure:
+The app provides the following features:
 
-    App component - the top-level component that contains the entire app
-        TodoForm component - renders the form for creating a new todo
-        TodoList component - renders the list of todos and allows users to update and delete them
-            TodoItem component - renders a single todo item
+    View a list of todos
+    Create a new todo
+    Update a todo
+    Delete a todo
