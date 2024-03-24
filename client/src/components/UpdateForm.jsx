@@ -12,22 +12,17 @@ const UpdateForm = ({
 			setUpdateItemText("");
 		}
 	};
-
 	return (
 		<form
 			className="update-form"
-			onSubmit={(e) => {
-				updateItem(e);
-			}}
+			onSubmit={(e) => updateItem(e)}
 			onKeyDown={handleKeyDown}
 		>
 			<input
 				className="update-new-input"
 				type="text"
 				placeholder="New Item"
-				onChange={(e) => {
-					setUpdateItemText(e.target.value);
-				}}
+				onChange={(e) => setUpdateItemText(e.target.value)}
 				value={updateItemText}
 			/>
 			<div className="button-group">

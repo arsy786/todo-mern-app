@@ -79,7 +79,6 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	/* padding-bottom: 10px; */
 }
 .update-new-input {
 	width: 100%;
@@ -87,11 +86,9 @@
 	border-radius: 6px;
 	border: 1px solid #eee;
 	padding: 8px;
-	/* padding: 15px; */
 	margin-top: 7px;
 	margin-bottom: 7px;
 	outline: none;
-	/* padding-bottom: 22px; */
 	font-size: 16px;
 }
 .update-new-btn {

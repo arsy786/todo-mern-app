@@ -5,9 +5,7 @@ const TodoForm = ({ itemText, setItemText, addItem, error }) => {
 				type="text"
 				className={error ? "input-error" : ""}
 				placeholder="Add Todo Item"
-				onChange={(e) => {
-					setItemText(e.target.value);
-				}}
+				onChange={(e) => setItemText(e.target.value)}
 				value={itemText}
 			/>
 			<button type="submit">Add</button>

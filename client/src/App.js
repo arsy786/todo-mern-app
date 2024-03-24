@@ -30,7 +30,6 @@ function App() {
 		}
 	};
 
-	//Create function to fetch all todo items from database -- we will use useEffect hook
 	useEffect(() => {
 		const getItemsList = async () => {
 			try {
@@ -44,7 +43,6 @@ function App() {
 		getItemsList();
 	}, []);
 
-	// Delete item when click on delete
 	const deleteItem = async (id) => {
 		try {
 			const res = await axios.delete(`http://localhost:5500/api/item/${id}`);
@@ -56,7 +54,6 @@ function App() {
 		}
 	};
 
-	// Update item
 	const updateItem = async (e) => {
 		e.preventDefault();
 		try {
