@@ -1,16 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
 	const [itemText, setItemText] = useState("");
 	const [listItems, setListItems] = useState([]);
 	const [isUpdating, setIsUpdating] = useState("");
 	const [updateItemText, setUpdateItemText] = useState("");
+	const [error, setError] = useState(false);
 
-	//add new todo item to database
 	const addItem = async (e) => {
 		e.preventDefault();
+		if (!itemText.trim()) {
+			setError(true);
+			setTimeout(() => setError(false), 400);
+			return;
+		}
+		setError(false);
 		try {
 			const res = await axios.post("http://localhost:5500/api/item", {
 				item: itemText,
@@ -69,93 +77,24 @@ function App() {
 		}
 	};
 
-	const handleKeyDown = (e) => {
-		if (e.key === "Escape") {
-			setIsUpdating("");
-			setUpdateItemText("");
-		}
-	};
-
-	//before updating item we need to show input field where we will create our updated item
-	const renderUpdateForm = () => (
-		<form
-			className="update-form"
-			onSubmit={(e) => {
-				updateItem(e);
-			}}
-			onKeyDown={handleKeyDown}
-		>
-			<input
-				className="update-new-input"
-				type="text"
-				placeholder="New Item"
-				onChange={(e) => {
-					setUpdateItemText(e.target.value);
-				}}
-				value={updateItemText}
-			/>
-			<button className="update-new-btn" type="submit">
-				Update
-			</button>
-			<button
-				className="cancel-btn"
-				type="button"
-				onClick={() => {
-					setIsUpdating("");
-					setUpdateItemText("");
-				}}
-			>
-				Cancel
-			</button>
-		</form>
-	);
-
 	return (
 		<div className="App">
 			<h1>Todo List</h1>
-			<form className="form" onSubmit={(e) => addItem(e)}>
-				<input
-					type="text"
-					placeholder="Add Todo Item"
-					onChange={(e) => {
-						setItemText(e.target.value);
-					}}
-					value={itemText}
-				/>
-				<button type="submit">Add</button>
-			</form>
-			<div className="todo-listItems">
-				{listItems.map((item) => (
-					<div className="todo-item" key={item._id}>
-						{isUpdating === item._id ? (
-							renderUpdateForm()
-						) : (
-							<>
-								<p className="item-content">{item.item}</p>
-								<div className="button-group">
-									<button
-										className="update-item"
-										onClick={() => {
-											setIsUpdating(item._id);
-											setUpdateItemText(item.item);
-										}}
-									>
-										Update
-									</button>
-									<button
-										className="delete-item"
-										onClick={() => {
-											deleteItem(item._id);
-										}}
-									>
-										Delete
-									</button>
-								</div>
-							</>
-						)}
-					</div>
-				))}
-			</div>
+			<TodoForm
+				itemText={itemText}
+				setItemText={setItemText}
+				addItem={addItem}
+				error={error}
+			/>
+			<TodoList
+				listItems={listItems}
+				deleteItem={deleteItem}
+				setIsUpdating={setIsUpdating}
+				setUpdateItemText={setUpdateItemText}
+				isUpdating={isUpdating}
+				updateItem={updateItem}
+				updateItemText={updateItemText}
+			/>
 		</div>
 	);
 }
