@@ -69,6 +69,13 @@ function App() {
 		}
 	};
 
+	const handleKeyDown = (e) => {
+		if (e.key === "Escape") {
+			setIsUpdating("");
+			setUpdateItemText("");
+		}
+	};
+
 	//before updating item we need to show input field where we will create our updated item
 	const renderUpdateForm = () => (
 		<form
@@ -76,6 +83,7 @@ function App() {
 			onSubmit={(e) => {
 				updateItem(e);
 			}}
+			onKeyDown={handleKeyDown}
 		>
 			<input
 				className="update-new-input"
@@ -88,6 +96,16 @@ function App() {
 			/>
 			<button className="update-new-btn" type="submit">
 				Update
+			</button>
+			<button
+				className="cancel-btn"
+				type="button"
+				onClick={() => {
+					setIsUpdating("");
+					setUpdateItemText("");
+				}}
+			>
+				Cancel
 			</button>
 		</form>
 	);
@@ -114,22 +132,25 @@ function App() {
 						) : (
 							<>
 								<p className="item-content">{item.item}</p>
-								<button
-									className="update-item"
-									onClick={() => {
-										setIsUpdating(item._id);
-									}}
-								>
-									Update
-								</button>
-								<button
-									className="delete-item"
-									onClick={() => {
-										deleteItem(item._id);
-									}}
-								>
-									Delete
-								</button>
+								<div className="button-group">
+									<button
+										className="update-item"
+										onClick={() => {
+											setIsUpdating(item._id);
+											setUpdateItemText(item.item);
+										}}
+									>
+										Update
+									</button>
+									<button
+										className="delete-item"
+										onClick={() => {
+											deleteItem(item._id);
+										}}
+									>
+										Delete
+									</button>
+								</div>
 							</>
 						)}
 					</div>

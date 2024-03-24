@@ -59,6 +59,10 @@
 .todo-item button:focus {
 	outline: none;
 }
+.button-group {
+	display: flex;
+	gap: 10px;
+}
 .update-item {
 	background-color: goldenrod;
 	color: #fff;
@@ -82,5 +86,14 @@
 .update-new-btn {
 	background-color: darkorchid;
 	color: #fff;
+	cursor: pointer;
+}
+.cancel-btn {
+	background-color: #ccc;
+	color: #333;
+	border: none;
+	border-radius: 6px;
+	padding: 8px 16px;
+	margin-left: 8px;
 	cursor: pointer;
 }
