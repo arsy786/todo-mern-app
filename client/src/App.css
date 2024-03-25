@@ -27,10 +27,6 @@
 .form input[type="text"].input-error {
 	border: 1px solid red;
 }
-.form input[type="text"]:focus,
-.form button[type="submit"]:focus {
-	outline: none;
-}
 .form button[type="submit"] {
 	background-color: #008080;
 	color: #fff;
@@ -58,9 +54,6 @@
 	border-radius: 6px;
 	cursor: pointer;
 	padding: 8px;
-}
-.todo button:focus {
-	outline: none;
 }
 .button-group {
 	display: flex;
@@ -109,4 +102,19 @@
 .cancel-btn {
 	width: 60px;
 	text-align: center;
+}
+.form input[type="text"],
+.form button[type="submit"],
+.todo button,
+.update-new-btn,
+.cancel-btn {
+	outline: none;
+}
+
+.form input[type="text"]:focus,
+.form button[type="submit"]:focus,
+.todo button:focus,
+.update-new-btn:focus,
+.cancel-btn:focus {
+	outline: 2px solid #4d90fe;
 }
