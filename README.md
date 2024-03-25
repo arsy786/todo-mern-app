@@ -90,10 +90,10 @@ After starting both the backend and frontend servers, you can access the web app
 
 The backend provides a REST API for managing todos. Here are the available endpoints:
 
-    GET /api/items - get all todos
-    POST /api/item - create a new todo
-    PUT /api/item/:id - update a todo by ID
-    DELETE /api/item/:id - delete a todo by ID
+    GET /api/todos - get all todos
+    POST /api/todo - create a new todo
+    PUT /api/todo/:id - update a todo by ID
+    DELETE /api/todo/:id - delete a todo by ID
 
 ## Client (Frontend)
 
