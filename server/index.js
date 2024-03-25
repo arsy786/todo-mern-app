@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const TodoItemRoute = require("./routes/todoItems");
+const TodoRoute = require("./routes/todo.route");
 
 const app = express();
 const PORT = process.env.PORT || 5500;
@@ -15,7 +15,7 @@ const corsOptions = {
 //Middleware
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use("/", TodoItemRoute);
+app.use("/", TodoRoute);
 
 //Connect to Mongo
 mongoose

@@ -1,12 +1,12 @@
-const TodoForm = ({ itemText, setItemText, addItem, error }) => {
+const TodoForm = ({ todoText, setTodoText, addTodo, error }) => {
 	return (
-		<form className="form" onSubmit={(e) => addItem(e)}>
+		<form className="form" onSubmit={(e) => addTodo(e)}>
 			<input
 				type="text"
 				className={error ? "input-error" : ""}
-				placeholder="Add Todo Item"
-				onChange={(e) => setItemText(e.target.value)}
-				value={itemText}
+				placeholder="Add Todo"
+				onChange={(e) => setTodoText(e.target.value)}
+				value={todoText}
 			/>
 			<button type="submit">Add</button>
 		</form>

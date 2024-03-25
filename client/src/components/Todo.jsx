@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import UpdateForm from "./UpdateForm";
 
-const TodoItem = ({
-	item,
-	deleteItem,
+const Todo = ({
+	todo,
+	deleteTodo,
 	setIsUpdating,
-	setUpdateItemText,
+	setUpdateTodoText,
 	isUpdating,
-	updateItem,
-	updateItemText,
+	updateTodo,
+	updateTodoText,
 }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 
 	const confirmDelete = () => {
-		deleteItem(item._id);
+		deleteTodo(todo._id);
 		setIsDeleting(false);
 	};
 
 	const renderDeleteConfirmation = () => (
 		<>
-			<button className="delete-item" onClick={confirmDelete}>
+			<button className="delete-todo" onClick={confirmDelete}>
 				Delete
 			</button>
 			<button className="cancel-btn" onClick={() => setIsDeleting(false)}>
@@ -31,32 +31,32 @@ const TodoItem = ({
 	const renderActionButtons = () => (
 		<>
 			<button
-				className="update-item"
+				className="update-todo"
 				onClick={() => {
-					setIsUpdating(item._id);
-					setUpdateItemText(item.item);
+					setIsUpdating(todo._id);
+					setUpdateTodoText(todo.todo);
 				}}
 			>
 				Update
 			</button>
-			<button className="delete-item" onClick={() => setIsDeleting(true)}>
+			<button className="delete-todo" onClick={() => setIsDeleting(true)}>
 				Delete
 			</button>
 		</>
 	);
 
 	return (
-		<div className="todo-item" key={item._id}>
-			{isUpdating === item._id ? (
+		<div className="todo" key={todo._id}>
+			{isUpdating === todo._id ? (
 				<UpdateForm
-					updateItem={updateItem}
+					updateTodo={updateTodo}
 					setIsUpdating={setIsUpdating}
-					setUpdateItemText={setUpdateItemText}
-					updateItemText={updateItemText}
+					setUpdateTodoText={setUpdateTodoText}
+					updateTodoText={updateTodoText}
 				/>
 			) : (
 				<>
-					<p className="item-content">{item.item}</p>
+					<p className="todo-content">{todo.todo}</p>
 					<div className="button-group">
 						{isDeleting ? renderDeleteConfirmation() : renderActionButtons()}
 					</div>
@@ -66,4 +66,4 @@ const TodoItem = ({
 	);
 };
 
-export default TodoItem;
+export default Todo;

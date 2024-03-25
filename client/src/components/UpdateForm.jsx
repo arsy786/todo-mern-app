@@ -1,29 +1,29 @@
 import React from "react";
 
 const UpdateForm = ({
-	updateItem,
+	updateTodo,
 	setIsUpdating,
-	setUpdateItemText,
-	updateItemText,
+	setUpdateTodoText,
+	updateTodoText,
 }) => {
 	const handleKeyDown = (e) => {
 		if (e.key === "Escape") {
 			setIsUpdating("");
-			setUpdateItemText("");
+			setUpdateTodoText("");
 		}
 	};
 	return (
 		<form
 			className="update-form"
-			onSubmit={(e) => updateItem(e)}
+			onSubmit={(e) => updateTodo(e)}
 			onKeyDown={handleKeyDown}
 		>
 			<input
 				className="update-new-input"
 				type="text"
-				placeholder="New Item"
-				onChange={(e) => setUpdateItemText(e.target.value)}
-				value={updateItemText}
+				placeholder="New Todo"
+				onChange={(e) => setUpdateTodoText(e.target.value)}
+				value={updateTodoText}
 			/>
 			<div className="button-group">
 				<button className="update-new-btn" type="submit">
@@ -34,7 +34,7 @@ const UpdateForm = ({
 					type="button"
 					onClick={() => {
 						setIsUpdating("");
-						setUpdateItemText("");
+						setUpdateTodoText("");
 					}}
 				>
 					Cancel

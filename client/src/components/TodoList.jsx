@@ -1,26 +1,26 @@
-import TodoItem from "./TodoItem";
+import Todo from "./Todo";
 
 const TodoList = ({
-	listItems,
-	deleteItem,
+	todoList,
+	deleteTodo,
 	isUpdating,
 	setIsUpdating,
-	setUpdateItemText,
-	updateItem,
-	updateItemText,
+	setUpdateTodoText,
+	updateTodo,
+	updateTodoText,
 }) => {
 	return (
-		<div className="todo-listItems">
-			{listItems.map((item) => (
-				<TodoItem
-					key={item._id}
-					item={item}
-					deleteItem={deleteItem}
+		<div className="todo-list">
+			{todoList.map((todo) => (
+				<Todo
+					key={todo._id}
+					todo={todo}
+					deleteTodo={deleteTodo}
 					setIsUpdating={setIsUpdating}
-					setUpdateItemText={setUpdateItemText}
+					setUpdateTodoText={setUpdateTodoText}
 					isUpdating={isUpdating}
-					updateItem={updateItem}
-					updateItemText={updateItemText}
+					updateTodo={updateTodo}
+					updateTodoText={updateTodoText}
 				/>
 			))}
 		</div>

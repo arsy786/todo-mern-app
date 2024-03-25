@@ -5,25 +5,25 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 function App() {
-	const [itemText, setItemText] = useState("");
-	const [listItems, setListItems] = useState([]);
+	const [todoText, setTodoText] = useState("");
+	const [todoList, setTodoList] = useState([]);
 	const [isUpdating, setIsUpdating] = useState("");
-	const [updateItemText, setUpdateItemText] = useState("");
+	const [updateTodoText, setUpdateTodoText] = useState("");
 	const [error, setError] = useState(false);
 
-	const addItem = async (e) => {
+	const addTodo = async (e) => {
 		e.preventDefault();
-		if (!itemText.trim()) {
+		if (!todoText.trim()) {
 			setError(true);
 			setTimeout(() => setError(false), 400);
 			return;
 		}
 		try {
-			const res = await axios.post("http://localhost:5500/api/item", {
-				item: itemText,
+			const res = await axios.post("http://localhost:5500/api/todo", {
+				todo: todoText,
 			});
-			setListItems((prev) => [...prev, res.data]);
-			setItemText("");
+			setTodoList((prev) => [...prev, res.data]);
+			setTodoText("");
 		} catch (err) {
 			setError(true);
 			setTimeout(() => setError(false), 400);
@@ -32,43 +32,43 @@ function App() {
 	};
 
 	useEffect(() => {
-		const getItemsList = async () => {
+		const getTodosList = async () => {
 			try {
-				const res = await axios.get("http://localhost:5500/api/items");
-				setListItems(res.data);
+				const res = await axios.get("http://localhost:5500/api/todos");
+				setTodoList(res.data);
 				console.log("render");
 			} catch (err) {
 				console.log(err);
 			}
 		};
-		getItemsList();
+		getTodosList();
 	}, []);
 
-	const deleteItem = async (id) => {
+	const deleteTodo = async (id) => {
 		try {
-			const res = await axios.delete(`http://localhost:5500/api/item/${id}`);
-			const newListItems = listItems.filter((item) => item._id !== id);
-			setListItems(newListItems);
+			const res = await axios.delete(`http://localhost:5500/api/todo/${id}`);
+			const newTodoList = todoList.filter((todo) => todo._id !== id);
+			setTodoList(newTodoList);
 			console.log(res.data);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
-	const updateItem = async (e) => {
+	const updateTodo = async (e) => {
 		e.preventDefault();
 		try {
 			const res = await axios.put(
-				`http://localhost:5500/api/item/${isUpdating}`,
-				{ item: updateItemText }
+				`http://localhost:5500/api/todo/${isUpdating}`,
+				{ todo: updateTodoText }
 			);
 			console.log(res.data);
-			const updatedItemIndex = listItems.findIndex(
-				(item) => item._id === isUpdating
+			const updatedTodoIndex = todoList.findIndex(
+				(todo) => todo._id === isUpdating
 			);
-			const updatedItem = (listItems[updatedItemIndex].item = updateItemText);
-			console.log(updatedItem);
-			setUpdateItemText("");
+			const updatedTodo = (todoList[updatedTodoIndex].todo = updateTodoText);
+			console.log(updatedTodo);
+			setUpdateTodoText("");
 			setIsUpdating("");
 		} catch (err) {
 			console.log(err);
@@ -79,19 +79,19 @@ function App() {
 		<div className="App">
 			<h1>Todo List</h1>
 			<TodoForm
-				itemText={itemText}
-				setItemText={setItemText}
-				addItem={addItem}
+				todoText={todoText}
+				setTodoText={setTodoText}
+				addTodo={addTodo}
 				error={error}
 			/>
 			<TodoList
-				listItems={listItems}
-				deleteItem={deleteItem}
+				todoList={todoList}
+				deleteTodo={deleteTodo}
 				setIsUpdating={setIsUpdating}
-				setUpdateItemText={setUpdateItemText}
+				setUpdateTodoText={setUpdateTodoText}
 				isUpdating={isUpdating}
-				updateItem={updateItem}
-				updateItemText={updateItemText}
+				updateTodo={updateTodo}
+				updateTodoText={updateTodoText}
 			/>
 		</div>
 	);
