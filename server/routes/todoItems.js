@@ -10,7 +10,7 @@ router.post("/api/item", async (req, res) => {
 		const saveItem = await newItem.save();
 		res.status(200).json(saveItem);
 	} catch (err) {
-		res.json(err);
+		res.status(400).json(err);
 	}
 });
 
@@ -20,7 +20,7 @@ router.get("/api/items", async (req, res) => {
 		const allTodoItems = await todoItemsModel.find({});
 		res.status(200).json(allTodoItems);
 	} catch (err) {
-		res.json(err);
+		res.status(400).json(err);
 	}
 });
 
@@ -32,7 +32,7 @@ router.put("/api/item/:id", async (req, res) => {
 		});
 		res.status(200).json(updateItem);
 	} catch (err) {
-		res.json(err);
+		res.status(400).json(err);
 	}
 });
 
@@ -42,7 +42,7 @@ router.delete("/api/item/:id", async (req, res) => {
 		const deleteItem = await todoItemsModel.findByIdAndDelete(req.params.id);
 		res.status(200).json("Item Deleted");
 	} catch (err) {
-		res.json(err);
+		res.status(400).json(err);
 	}
 });
 

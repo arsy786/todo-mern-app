@@ -17,7 +17,6 @@ const TodoItem = ({
 		setIsDeleting(false);
 	};
 
-	// Function to render delete confirmation buttons (Delete and Cancel)
 	const renderDeleteConfirmation = () => (
 		<>
 			<button className="delete-item" onClick={confirmDelete}>
@@ -29,7 +28,6 @@ const TodoItem = ({
 		</>
 	);
 
-	// Function to render the normal buttons (Update and Delete)
 	const renderActionButtons = () => (
 		<>
 			<button

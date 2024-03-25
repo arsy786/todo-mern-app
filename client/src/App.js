@@ -18,7 +18,6 @@ function App() {
 			setTimeout(() => setError(false), 400);
 			return;
 		}
-		setError(false);
 		try {
 			const res = await axios.post("http://localhost:5500/api/item", {
 				item: itemText,
@@ -26,6 +25,8 @@ function App() {
 			setListItems((prev) => [...prev, res.data]);
 			setItemText("");
 		} catch (err) {
+			setError(true);
+			setTimeout(() => setError(false), 400);
 			console.log(err);
 		}
 	};
