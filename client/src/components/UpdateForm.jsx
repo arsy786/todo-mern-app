@@ -18,7 +18,9 @@ const UpdateForm = ({ todo, setUpdatingTodoId }) => {
 		dispatch(
 			updateTodo({
 				id: todo._id,
-				todoText: updateText,
+				changes: {
+					todo: updateText,
+				},
 			})
 		).then(() => {
 			setUpdateText("");

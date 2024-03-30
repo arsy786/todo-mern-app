@@ -26,10 +26,11 @@ export const deleteTodo = createAsyncThunk("todo/deleteTodo", async (id) => {
 
 export const updateTodo = createAsyncThunk(
 	"todo/updateTodo",
-	async ({ id, todoText }) => {
-		const response = await axios.put(`http://localhost:5500/api/todo/${id}`, {
-			todo: todoText,
-		});
+	async ({ id, changes }) => {
+		const response = await axios.put(
+			`http://localhost:5500/api/todo/${id}`,
+			changes
+		);
 		return response.data;
 	}
 );

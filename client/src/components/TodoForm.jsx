@@ -9,6 +9,10 @@ const TodoForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (todoText.length > 40) {
+			dispatch(setError(true));
+			return;
+		}
 		dispatch(addTodo(todoText));
 		setTodoText("");
 	};

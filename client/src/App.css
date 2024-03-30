@@ -46,6 +46,21 @@
 	align-items: center;
 	margin-bottom: 10px;
 }
+.checkbox-text-group {
+	display: flex;
+	align-items: center;
+}
+.todo-checkbox {
+	margin-right: 15px;
+	transform: scale(1.5);
+}
+.todo-checkbox input[type="checkbox"] {
+	cursor: pointer;
+}
+.todo-content {
+	cursor: pointer;
+	word-wrap: break-word;
+}
 .item-content {
 	width: 60%;
 }
