@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateTodo } from "../reducers/todoSlice";
 
-const UpdateForm = ({
-	updateTodo,
-	setIsUpdating,
-	setUpdateTodoText,
-	updateTodoText,
-}) => {
+const UpdateForm = ({ todo, setUpdatingTodoId }) => {
+	const [updateText, setUpdateText] = useState(todo.todo);
+	const dispatch = useDispatch();
+
 	const handleKeyDown = (e) => {
 		if (e.key === "Escape") {
-			setIsUpdating("");
-			setUpdateTodoText("");
+			setUpdatingTodoId("");
+			setUpdateText("");
 		}
 	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		dispatch(
+			updateTodo({
+				id: todo._id,
+				todoText: updateText,
+			})
+		).then(() => {
+			setUpdateText("");
+			setUpdatingTodoId("");
+		});
+	};
+
 	return (
 		<form
 			className="update-form"
-			onSubmit={(e) => updateTodo(e)}
+			onSubmit={handleSubmit}
 			onKeyDown={handleKeyDown}
 		>
 			<input
 				className="update-new-input"
 				type="text"
 				placeholder="New Todo"
-				onChange={(e) => setUpdateTodoText(e.target.value)}
-				value={updateTodoText}
+				onChange={(e) => setUpdateText(e.target.value)}
+				value={updateText}
 			/>
 			<div className="button-group">
 				<button className="update-new-btn" type="submit">
@@ -33,8 +47,8 @@ const UpdateForm = ({
 					className="cancel-btn"
 					type="button"
 					onClick={() => {
-						setIsUpdating("");
-						setUpdateTodoText("");
+						setUpdatingTodoId("");
+						setUpdateText("");
 					}}
 				>
 					Cancel

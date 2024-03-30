@@ -27,9 +27,13 @@ router.get("/api/todos", async (req, res) => {
 // Update todo
 router.put("/api/todo/:id", async (req, res) => {
 	try {
-		const updateTodo = await Todo.findByIdAndUpdate(req.params.id, {
-			$set: req.body,
-		});
+		const updateTodo = await Todo.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: req.body,
+			},
+			{ new: true }
+		);
 		res.status(200).json(updateTodo);
 	} catch (err) {
 		res.status(400).json(err);

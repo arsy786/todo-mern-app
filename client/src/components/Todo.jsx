@@ -1,25 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "../reducers/todoSlice";
 import UpdateForm from "./UpdateForm";
 
-const Todo = ({
-	todo,
-	deleteTodo,
-	setIsUpdating,
-	setUpdateTodoText,
-	isUpdating,
-	updateTodo,
-	updateTodoText,
-}) => {
+const Todo = ({ todo }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [updatingTodoId, setUpdatingTodoId] = useState("");
+	const dispatch = useDispatch();
 
-	const confirmDelete = () => {
-		deleteTodo(todo._id);
+	const handleDelete = () => {
+		dispatch(deleteTodo(todo._id));
 		setIsDeleting(false);
 	};
 
 	const renderDeleteConfirmation = () => (
 		<>
-			<button className="delete-todo" onClick={confirmDelete}>
+			<button className="delete-todo" onClick={handleDelete}>
 				Delete
 			</button>
 			<button className="cancel-btn" onClick={() => setIsDeleting(false)}>
@@ -32,10 +28,7 @@ const Todo = ({
 		<>
 			<button
 				className="update-todo"
-				onClick={() => {
-					setIsUpdating(todo._id);
-					setUpdateTodoText(todo.todo);
-				}}
+				onClick={() => setUpdatingTodoId(todo._id)}
 			>
 				Update
 			</button>
@@ -47,13 +40,8 @@ const Todo = ({
 
 	return (
 		<div className="todo" key={todo._id}>
-			{isUpdating === todo._id ? (
-				<UpdateForm
-					updateTodo={updateTodo}
-					setIsUpdating={setIsUpdating}
-					setUpdateTodoText={setUpdateTodoText}
-					updateTodoText={updateTodoText}
-				/>
+			{updatingTodoId === todo._id ? (
+				<UpdateForm todo={todo} setUpdatingTodoId={setUpdatingTodoId} />
 			) : (
 				<>
 					<p className="todo-content">{todo.todo}</p>
