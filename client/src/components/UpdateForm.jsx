@@ -5,6 +5,7 @@ const UpdateForm = ({
 	setIsUpdating,
 	setUpdateTodoText,
 	updateTodoText,
+	todo,
 }) => {
 	const handleKeyDown = (e) => {
 		if (e.key === "Escape") {
@@ -12,10 +13,16 @@ const UpdateForm = ({
 			setUpdateTodoText("");
 		}
 	};
+
+	const handleUpdateSubmit = (e) => {
+		e.preventDefault();
+		updateTodo(todo._id, { todo: updateTodoText });
+	};
+
 	return (
 		<form
 			className="update-form"
-			onSubmit={(e) => updateTodo(e)}
+			onSubmit={handleUpdateSubmit}
 			onKeyDown={handleKeyDown}
 		>
 			<input

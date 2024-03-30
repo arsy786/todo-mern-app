@@ -11,10 +11,21 @@ const Todo = ({
 	updateTodoText,
 }) => {
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [isChecked, setIsChecked] = useState(todo.completed);
 
 	const confirmDelete = () => {
 		deleteTodo(todo._id);
 		setIsDeleting(false);
+	};
+
+	const handleClick = () => {
+		toggleChecked();
+	};
+
+	const toggleChecked = () => {
+		const newCheckedStatus = !isChecked;
+		setIsChecked(newCheckedStatus);
+		updateTodo(todo._id, { completed: newCheckedStatus });
 	};
 
 	const renderDeleteConfirmation = () => (
@@ -53,10 +64,26 @@ const Todo = ({
 					setIsUpdating={setIsUpdating}
 					setUpdateTodoText={setUpdateTodoText}
 					updateTodoText={updateTodoText}
+					todo={todo}
 				/>
 			) : (
 				<>
-					<p className="todo-content">{todo.todo}</p>
+					<div className="checkbox-text-group">
+						<div className="todo-checkbox">
+							<input
+								type="checkbox"
+								checked={isChecked}
+								onChange={toggleChecked}
+							/>
+						</div>
+						<p
+							className="todo-content"
+							style={{ textDecoration: isChecked ? "line-through" : "none" }}
+							onClick={handleClick}
+						>
+							{todo.todo}
+						</p>
+					</div>
 					<div className="button-group">
 						{isDeleting ? renderDeleteConfirmation() : renderActionButtons()}
 					</div>

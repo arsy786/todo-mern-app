@@ -13,7 +13,10 @@ function App() {
 
 	const addTodo = async (e) => {
 		e.preventDefault();
-		if (!todoText.trim()) {
+		if (
+			!todoText.trim() ||
+			(todoText.indexOf(" ") === -1 && todoText.length > 40)
+		) {
 			setError(true);
 			setTimeout(() => setError(false), 400);
 			return;
@@ -55,21 +58,24 @@ function App() {
 		}
 	};
 
-	const updateTodo = async (e) => {
-		e.preventDefault();
+	const updateTodo = async (id, updatedFields) => {
 		try {
 			const res = await axios.put(
-				`http://localhost:5500/api/todo/${isUpdating}`,
-				{ todo: updateTodoText }
+				`http://localhost:5500/api/todo/${id}`,
+				updatedFields
 			);
 			console.log(res.data);
-			const updatedTodoIndex = todoList.findIndex(
-				(todo) => todo._id === isUpdating
-			);
-			const updatedTodo = (todoList[updatedTodoIndex].todo = updateTodoText);
-			console.log(updatedTodo);
-			setUpdateTodoText("");
-			setIsUpdating("");
+			const updatedTodoIndex = todoList.findIndex((todo) => todo._id === id);
+			const newTodoList = [...todoList];
+			newTodoList[updatedTodoIndex] = {
+				...newTodoList[updatedTodoIndex],
+				...updatedFields,
+			};
+			setTodoList(newTodoList);
+			if (updatedFields.todo) {
+				setUpdateTodoText("");
+				setIsUpdating("");
+			}
 		} catch (err) {
 			console.log(err);
 		}
