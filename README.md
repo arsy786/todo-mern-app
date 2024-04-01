@@ -1,8 +1,13 @@
 # Todo MERN App
 
-This is a simple Todo MERN (MongoDB, Express, React, Node.js) app that allows users to create, read, update, and delete todos. The app is built using the MERN stack and follows the CRUD (Create, Read, Update, Delete) operations.
+This is a simple Todo app designed for managing tasks with ease. The app is built using the MERN (MongoDB, Express, React, Node.js) stack and supports essential CRUD (Create, Read, Update, Delete) operations. It utilizes MongoDB for database management, Express and Node.js for server-side functionality, and React for a dynamic front-end user experience.
 
 <!-- Tutorial Guide: [MERN Stack Tutorial - Build Todo App With Node JS, Express, React & MongoDB (YouTube/CurlyBraces)](https://www.youtube.com/watch?v=U4syTDaAKWg) -->
+
+## Branches
+
+    - master: no redux toolkit
+    - with-redux-toolkit: uses redux toolkit to manage global state.
 
 ## Getting Started
 
@@ -10,6 +15,7 @@ This project is divided into two main parts: the server (API) and the client (UI
 
 ### Prerequisites
 
+- Git
 - Node.js
 - MongoDB
 
